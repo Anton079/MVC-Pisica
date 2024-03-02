@@ -7,6 +7,11 @@ internal class Program
         PisicaService service = new PisicaService();
 
         service.LoadData();
-        service.AfisarePisica();
+
+        List<Pisica> pisicas = service.FilterCatsByAge();
+        foreach(Pisica x in pisicas)
+        {
+            Console.WriteLine(x.PisicaInfo());
+        }
     }
 }

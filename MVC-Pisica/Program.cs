@@ -8,10 +8,10 @@ internal class Program
 
         service.LoadData();
 
-        List<Pisica> pisicas = service.FilterCatsByAge();
-        foreach(Pisica x in pisicas)
-        {
-            Console.WriteLine(x.PisicaInfo());
-        }
+        Pisica pisicaNoua = new Pisica();
+        pisicaNoua.varstaAni = 6;
+        pisicaNoua.inaltimeCm = 28;
+        pisicaNoua.rasaPisica = "Ragdoll";
+
     }
 }

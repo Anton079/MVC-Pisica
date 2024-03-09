@@ -44,13 +44,6 @@ namespace MVC_Pisica
             this.PisicaList.Add(pisica1);
         }
 
-        public void AfisarePisica()
-        {
-            foreach(Pisica x in PisicaList)
-            {
-                Console.Write(x.PisicaInfo());
-            }
-        }
 
         //functie ce afiseaza o lista cu toate pisicile intre 3 si 7 ani
         public List <Pisica> FilterCatsByAge()
@@ -71,32 +64,50 @@ namespace MVC_Pisica
                 }
             }
             return pisicasList;
-        } 
-
-        //functie ce aduna varsta tuturor pisicilor inafara de pirma si ultima
-        public Pisica TotalAge()
-        {
-            int suma = 0;
-            for (int i = 1; i < PisicaList.Count - 1; i++)
-            {
-                suma += PisicaList[i].varstaAni;
-            }
-            return suma;
         }
 
         //CRUD
-        public bool EditCatBreed(string nrPisica, string Breed)
+        public void AfisarePisica()
         {
-            foreach (Pisica x in PisicaList)
+            foreach(Pisica x in PisicaList)
             {
-                if (x.rasaPisica == nrPisica)
+                Console.Write(x.PisicaInfo());
+            }
+        }
+
+        public int FindPisicaByRasa(string rasaCautata)
+        {
+            for (int i = 0; i < PisicaList.Count; i++)
+            {
+                if (PisicaList[i].rasaPisica == rasaCautata)
                 {
-                    x.rasaPisica = Breed;
-                    return true;
+                    return i;
                 }
+            }
+            return -1;
+        }
+
+        public bool AddPisicaInList(Pisica PisicaNoua)
+        {
+            if (FindPisicaByRasa(PisicaNoua.rasaPisica) == -1)
+            {
+                this.PisicaList.Add(PisicaNoua);
+                return true;
             }
             return false;
         }
-       
+
+        public bool RemovePisicaByRasa(string PisicaCautata)
+        {
+            int PisicaCautataIndex = FindPisicaByRasa(PisicaCautata);
+            if (PisicaCautataIndex != -1)
+            {
+                PisicaList.RemoveAt(PisicaCautataIndex);
+                return true;
+            }
+            return false;
+        }
+
+        //View
     }
 }

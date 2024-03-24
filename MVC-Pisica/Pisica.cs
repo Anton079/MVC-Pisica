@@ -8,9 +8,27 @@ namespace MVC_Pisica
 {
     public class Pisica
     {
-        public int varstaAni;
-        public int inaltimeCm;
-        public string rasaPisica;
+        public int _varstaAni;
+        public int _inaltimeCm;
+        public string _rasaPisica;
+
+        public int varstaAni
+        {
+            get { return _varstaAni; }
+            set { _varstaAni = value; }
+        }
+
+        public int inaltimeCm
+        {
+            get { return _inaltimeCm; }
+            set { _inaltimeCm = value; }
+        }
+
+        public string rasaPisica
+        {
+            get { return _rasaPisica; }
+            set { _rasaPisica = value; }
+        }
 
         public string PisicaInfo()
         {

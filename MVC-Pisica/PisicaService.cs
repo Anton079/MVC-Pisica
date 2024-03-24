@@ -8,7 +8,12 @@ namespace MVC_Pisica
 {
     public class PisicaService
     {
-        public List <Pisica> PisicaList = new List <Pisica> ();
+        public List <Pisica> _PisicaList;
+
+        public PisicaService()
+        {
+            _PisicaList = new List<Pisica>();
+        }
 
         public void LoadData()
         {
@@ -37,11 +42,11 @@ namespace MVC_Pisica
             pisica5.inaltimeCm = 18;
             pisica5.rasaPisica = "Birmaneza";
 
-            this.PisicaList.Add(pisica5);
-            this.PisicaList.Add(pisica4);
-            this.PisicaList.Add(pisica3);
-            this.PisicaList.Add(pisica2);
-            this.PisicaList.Add(pisica1);
+            this._PisicaList.Add(pisica5);
+            this._PisicaList.Add(pisica4);
+            this._PisicaList.Add(pisica3);
+            this._PisicaList.Add(pisica2);
+            this._PisicaList.Add(pisica1);
         }
 
 
@@ -53,7 +58,7 @@ namespace MVC_Pisica
             int nr7 = 7;
             List <Pisica> pisicasList = new List <Pisica>();
 
-            foreach(Pisica x in PisicaList)
+            foreach(Pisica x in _PisicaList)
             {
                 if(x.varstaAni >= nr3)
                 {
@@ -69,7 +74,7 @@ namespace MVC_Pisica
         //CRUD
         public void AfisarePisica()
         {
-            foreach(Pisica x in PisicaList)
+            foreach(Pisica x in _PisicaList)
             {
                 Console.Write(x.PisicaInfo());
             }
@@ -77,9 +82,9 @@ namespace MVC_Pisica
 
         public int FindPisicaByRasa(string rasaCautata)
         {
-            for (int i = 0; i < PisicaList.Count; i++)
+            for (int i = 0; i < _PisicaList.Count; i++)
             {
-                if (PisicaList[i].rasaPisica == rasaCautata)
+                if (_PisicaList[i].rasaPisica == rasaCautata)
                 {
                     return i;
                 }
@@ -91,7 +96,7 @@ namespace MVC_Pisica
         {
             if (FindPisicaByRasa(PisicaNoua.rasaPisica) == -1)
             {
-                this.PisicaList.Add(PisicaNoua);
+                this._PisicaList.Add(PisicaNoua);
                 return true;
             }
             return false;
@@ -102,12 +107,51 @@ namespace MVC_Pisica
             int PisicaCautataIndex = FindPisicaByRasa(PisicaCautata);
             if (PisicaCautataIndex != -1)
             {
-                PisicaList.RemoveAt(PisicaCautataIndex);
+                _PisicaList.RemoveAt(PisicaCautataIndex);
                 return true;
             }
             return false;
         }
 
         //View
+
+        public bool AdoptareaUneiPisici(string pisicaDorit)
+        {
+            int poz = FindPisicaByRasa(pisicaDorit);
+
+            if (poz != -1)
+            {
+                _PisicaList.RemoveAt(poz);
+                return true;
+            }
+            return false;
+        }
+
+        public bool EditAnimalVarsta(string animal, int varstaNou)
+        {
+            foreach (Pisica x in _PisicaList)
+            {
+                if (x.rasaPisica == animal)
+                {
+                    x.varstaAni = varstaNou;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool EditAnimalHigh(int inaltime, string animal)
+        {
+            foreach (Pisica x in _PisicaList)
+            {
+                if (x.rasaPisica == animal)
+                {
+                    x.varstaAni = inaltime;
+                    return true;
+                }
+
+            }
+            return false;
+        }
     }
 }
